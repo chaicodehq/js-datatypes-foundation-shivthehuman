@@ -51,21 +51,49 @@
  *   findCheapestAndCostliest(150, 80, 200) // => { cheapest: 80, costliest: 200 }
  */
 export function parseFare(fareString) {
-  // Your code here
+if(typeof fareString !== "string") return -1;
+const a=parseFloat(fareString);
+if(isNaN(a)) return -1;
+return a;
 }
 
 export function roundFare(amount, decimalPlaces) {
-  // Your code here
+  if( typeof amount !== "number" || decimalPlaces<0 || !Number.isInteger(decimalPlaces)) return "";
+  return amount.toFixed(decimalPlaces);
 }
 
 export function calculateSurge(baseFare, surgeMultiplier) {
-  // Your code here
+  if (typeof baseFare !== "number" || typeof surgeMultiplier !== "number") {
+    return 0;
+  }
+  if (baseFare <= 0 || surgeMultiplier <= 0 ) return 0;
+  const a = baseFare * surgeMultiplier;
+  return Math.ceil(a);
+
 }
 
 export function findCheapestAndCostliest(...fares) {
-  // Your code here
+
+  const validFares = fares.filter(
+    (f) => typeof f === "number" && !isNaN(f)
+  );
+
+  if (validFares.length === 0) {
+    return null;
+  }
+  const min = Math.min(...validFares);
+  const max = Math.max(...validFares);
+  return {
+    cheapest: min,
+    costliest: max
+  };
 }
 
 export function getDistanceDifference(from, to) {
-  // Your code here
+const a = parseInt(from);
+const b = parseInt(to);
+  if (isNaN(a) || isNaN(b)) return -1
+return Math.abs(a-b);
 }
+
+//           npm test -- 03-rickshaw
