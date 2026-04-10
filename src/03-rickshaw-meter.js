@@ -53,15 +53,14 @@
 export function parseFare(fareString) {
 if(typeof fareString !== "string") return -1;
 const a=parseFloat(fareString);
+
 if(isNaN(a)) return -1;
 return a;
 }
-
 export function roundFare(amount, decimalPlaces) {
   if( typeof amount !== "number" || decimalPlaces<0 || !Number.isInteger(decimalPlaces)) return "";
   return amount.toFixed(decimalPlaces);
 }
-
 export function calculateSurge(baseFare, surgeMultiplier) {
   if (typeof baseFare !== "number" || typeof surgeMultiplier !== "number") {
     return 0;
@@ -69,11 +68,8 @@ export function calculateSurge(baseFare, surgeMultiplier) {
   if (baseFare <= 0 || surgeMultiplier <= 0 ) return 0;
   const a = baseFare * surgeMultiplier;
   return Math.ceil(a);
-
 }
-
 export function findCheapestAndCostliest(...fares) {
-
   const validFares = fares.filter(
     (f) => typeof f === "number" && !isNaN(f)
   );
@@ -97,3 +93,26 @@ return Math.abs(a-b);
 }
 
 //           npm test -- 03-rickshaw
+
+
+/**The function will return **{ cheapest: 80, costliest: 200 }**.
+
+Here is the quick dry run for `findCheapestAndCostliest(150, 80, 200)`:
+
+1. **`...fares`**: The rest parameter collects the arguments into an array: `fares = [150, 80, 200]`.
+2. **`validFares`**: The `.filter()` method checks each item. Since 150, 80, and 200 are all valid numbers (not `NaN`), `validFares` remains `[150, 80, 200]`.
+3. **`if (validFares.length === 0)`**: The length is 3, so this check is skipped.
+4. **`Math.min(...validFares)`**: The spread operator (`...`) unpacks the array. `Math.min(150, 80, 200)` finds the lowest value: **80**.
+5. **`Math.max(...validFares)`**: `Math.max(150, 80, 200)` finds the highest value: **200**.
+6. **`return`**: It outputs the final object `{ cheapest: 80, costliest: 200 }`.
+
+---
+
+
+### Revision Notes
+* **Rest Parameter (`...args`):** Used in the function definition to gather any number of arguments into a single array.
+* **`.filter()` Method:** Creates a new array containing only the elements that pass the condition inside the callback function.
+* **`!isNaN(f)`:** A crucial check. In JavaScript, `typeof NaN` is actually "number", so checking `!isNaN(f)` ensures you are working with a real, usable number.
+* **Spread Syntax (`...array`):** Used inside `Math.min()` and `Math.max()` to expand the array back into individual arguments, 
+because those Math methods do not accept arrays directly.
+ */

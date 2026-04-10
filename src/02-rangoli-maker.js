@@ -73,7 +73,7 @@ export function replaceRangoliColor(design, oldColor, newColor) {
 }
 
 export function makeRangoliBorder(char, length) {
-  if (typeof char !== "string" || length < 0) return "";
+  if (typeof char !== "string" || length < 0 || typeof length !== "number") return "";
   return char.repeat(length).slice(0, length);
 }
 

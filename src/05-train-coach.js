@@ -48,21 +48,68 @@
  *   areAllConfirmed(passengers)          // => true/false
  */
 export function findPassenger(passengers, name) {
-  // Your code here
+  if (!Array.isArray(passengers) || typeof name !== "string") {
+    return undefined;
+  }
+  const searchName = name.toLowerCase();
+  return passengers.find((p) => {
+    if (typeof p.name === "string") {
+      return p.name.toLowerCase() === searchName;
+    }
+    return false;
+  });
 }
 
 export function getPassengerIndex(passengers, name) {
-  // Your code here
+  if (!Array.isArray(passengers) || typeof name !== "string") {
+    return -1;
+  }
+  const searchName = name.toLowerCase();
+  return passengers.findIndex((p) => {
+    if (typeof p.name === "string") {
+      return p.name.toLowerCase() === searchName;
+    }
+    return false;
+  });
 }
 
 export function isAnyWaitlisted(passengers) {
-  // Your code here
+if (!Array.isArray(passengers) ||  passengers.length === 0) {
+    return false;
+  }
+ // Example: isAnyWaitlisted([{ status: "confirmed" }, { status: "waitlisted" }]) => true
+return passengers.some((p) => {
+  if(typeof p.status === "string") {
+    return p.status === "waitlisted";
+  }
+  return false;
+});
 }
 
 export function areAllConfirmed(passengers) {
-  // Your code here
+// Example: areAllConfirmed([{ status: "confirmed" }, { status: "confirmed" }]) => true
+// .every() se check karo ki SAB passengers "confirmed" hain ya nahi
+
+  if (!Array.isArray(passengers) || passengers.length === 0) {
+    return false;
+  }
+  return passengers.every((p) => {
+    if(typeof p.status ==="string"){
+      return p.status ==="confirmed"
+    }
+    return false;
+  })
 }
 
 export function getWaitlistedPassengers(passengers) {
-  // Your code here
+  if(!Array.isArray(passengers)) return [];
+  return passengers.filter((p) => {
+    if(typeof p.status==="string"){
+      return p.status === "waitlisted";
+    }
+    return false;
+  })
 }
+
+
+//             npm test -- 05-train
