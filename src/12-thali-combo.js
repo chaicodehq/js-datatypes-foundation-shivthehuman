@@ -50,14 +50,39 @@
  *
  * @example
  *   createThaliDescription({name:"Rajasthani Thali", items:["dal"], price:250, isVeg:true})
- *   // => "RAJASTHANI THALI (Veg) - Items: dal - Rs.250.00"
+ *   /// => "RAJASTHANI THALI (Veg) - Items: dal - Rs.250.00"
  */
 export function createThaliDescription(thali) {
-  // Your code here
+    if (!thali ||
+      typeof thali.name !== 'string' ||
+      !Array.isArray(thali.items) ||
+      typeof thali.price !== 'number' ||
+      typeof thali.isVeg !== 'boolean') {
+      return "";
+    }
+
+    const vegStatus = thali.isVeg ? "Veg" : "Non-Veg";
+    const items = thali.items.join(", ");
+
+    return `${thali.name.toUpperCase()} (${vegStatus}) - Items: ${items} - Rs.${thali.price.toFixed(2)}`;
 }
 
 export function getThaliStats(thalis) {
-  // Your code here
+  
+  /**getThaliStats(thalis)
+ *      - Array of thali objects ka stats nikalo
+ *      - .filter() se veg/non-veg count
+ *      - .reduce() se average price
+ *      - Math.min/Math.max se cheapest/costliest
+ *      - .map() se saare names
+ *      - Return: { totalThalis, vegCount, nonVegCount, avgPrice (2 decimal string),
+ *                  cheapest (number), costliest (number), names (array) }
+ *      - Agar thalis array nahi hai ya empty hai, return null
+ * */
+
+
+
+  
 }
 
 export function searchThaliMenu(thalis, query) {

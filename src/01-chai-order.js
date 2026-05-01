@@ -51,12 +51,12 @@ export function getChaiOrderLength(order) {
 }
 
 export function shoutChaiOrder(order) {
-  if (typeof order !== "string") return "";
+  if (typeof order !== "string" || order.trim() === "") return "";
     return order.trim().toUpperCase();
 }
 
 export function whisperChaiOrder(order) {
-  if (typeof order !== "string") return "";
+  if (typeof order !== "string" || order.trim() === "") return "";
   return order.trim().toLowerCase();
 }
 
@@ -65,9 +65,13 @@ export function hasSpecialIngredient(order, ingredient) {
     return false;
   }
 
-  const normalizedOrder = order.toLowerCase();
-  const normalizedIngredient = ingredient.toLowerCase();
-  return normalizedOrder.includes(normalizedIngredient);
+  // const normalizedOrder = order.toLowerCase();
+  // const normalizedIngredient = ingredient.toLowerCase();
+  // return normalizedOrder.includes(normalizedIngredient);
+  order.toLowerCase();
+  ingredient.toLowerCase();
+  
+  return order.includes(ingredient);
 }
 
 export function getFirstAndLastChar(order) {
